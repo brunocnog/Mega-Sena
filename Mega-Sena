@@ -1,0 +1,3 @@
+numeros_sena = range(60)
+numeros_escolhidos = random.sample(numeros_sena, 6)
+numeros_escolhidos
