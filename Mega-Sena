@@ -1,3 +1,45 @@
-numeros_sena = range(60)
-numeros_escolhidos = random.sample(numeros_sena, 6)
-numeros_escolhidos
+import random
+
+precos = {
+    6: 6,
+    7: 35,
+    8: 140,
+    9: 420,
+    10: 1050,
+    11: 2310,
+    12: 4620,
+    13: 8580,
+    14: 15015,
+    15: 25025
+}
+
+print("=== GERADOR DE JOGOS DA MEGA-SENA ===")
+
+qtd_jogos = int(input("Quantos jogos você deseja gerar? "))
+
+while True:
+    qtd_numeros = int(input("Quantos números por jogo (entre 6 e 15)? "))
+    if qtd_numeros in precos:
+        break
+    print("Quantidade inválida! Escolha entre 6 e 15.")
+
+usar_faixa = input("Deseja escolher uma faixa de números? (s/n): ").lower()
+if usar_faixa == "s":
+    faixa_inicio = int(input("Número inicial da faixa (mínimo 1): "))
+    faixa_fim = int(input("Número final da faixa (máximo 60): "))
+    numeros_disponiveis = list(range(faixa_inicio, faixa_fim + 1))
+else:
+    numeros_disponiveis = list(range(1, 61))
+
+jogos = []
+for _ in range(qtd_jogos):
+    jogo = sorted(random.sample(numeros_disponiveis, qtd_numeros))
+    jogos.append(jogo)
+
+print("\n=== JOGOS GERADOS ===")
+for i, jogo in enumerate(jogos, 1):
+    print(f"Jogo {i}: {jogo}")
+
+# calcular preço total
+preco_total = precos[qtd_numeros] * qtd_jogos
+print(f"\nPreço total: R$ {preco_total:,}".replace(",", "."))
